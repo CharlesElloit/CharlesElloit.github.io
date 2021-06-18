@@ -3,6 +3,7 @@
   --dark-black: #0d1117;
   --light-black: #161b22;
   --light-green: #328637;
+  --text-grey-color: #6E7681;
   --light-blue: #58a6ff;
 }
 
@@ -13,9 +14,42 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--dark-black);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Mui overrides */
+
+.MuiOutlinedInput-input {
+  padding: 7px 10px !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 0 !important;
+  border-radius: 5px !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  border: 1px solid #6E7681 !important;
+}
+
+.MuiOutlinedInput-input:hover {
+  outline-style: none !important;
+  box-shadow: none;
+  border: 1px solid #6E7681 !important;
+}
+
+.MuiFormHelperText-contained {
+  margin-left: 0 !important;
+  color: var(--text-grey-color) !important;
+}
+
+.MuiOutlinedInput-multiline {
+  padding: 0 !important;
+}
+
+.MuiPaper-root {
+  background-color: #0d1117 !important;
 }
