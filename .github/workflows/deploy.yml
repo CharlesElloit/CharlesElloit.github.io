@@ -1,5 +1,4 @@
 # This workflow will automatically deploy a clean codebase to Netlify,
-
 name: Deploy Netlify
 
 on:
