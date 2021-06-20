@@ -1,0 +1,16 @@
+# This workflow will automatically deploy a clean codebase to Netlify,
+
+name: Deploy Netlify
+
+on:
+  push:
+    branches: [prod]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy site
+      run: curl -X POST -d {} ${{ secrets.NETLIFY_DEPLOY_HOOK }}
