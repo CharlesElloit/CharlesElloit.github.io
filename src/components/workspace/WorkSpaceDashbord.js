@@ -27,7 +27,7 @@ export default function WorkSpaceDashbord() {
   const fetchWorkspaces = React.useRef(() => {});
 
   fetchWorkspaces.current = async () => {
-    const workspace = await axios.get("/workspaces")
+    const workspace = await axios.get("https://dailytasks-api.herokuapp.com/workspaces");
     if(workspace) {
       setState({ ...state, workspaces: workspace.data.results })
     }
