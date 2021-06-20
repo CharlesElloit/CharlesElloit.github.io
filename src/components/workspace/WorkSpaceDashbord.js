@@ -27,7 +27,7 @@ export default function WorkSpaceDashbord() {
   const fetchWorkspaces = React.useRef(() => {});
 
   fetchWorkspaces.current = async () => {
-    const workspace = await axios.get("http://localhost:4000/workspaces")
+    const workspace = await axios.get("/workspaces")
     if(workspace) {
       setState({ ...state, workspaces: workspace.data.results })
     }
