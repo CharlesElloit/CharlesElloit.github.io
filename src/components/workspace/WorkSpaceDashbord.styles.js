@@ -14,6 +14,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 25,
     fontWeight: 700,
   },
+  titleContainer: {
+    color: "#fff",
+    display: "flex",
+    flexDirection: "row",
+    marginTop: theme.spacing(4),
+    justifyContent: "space-between",
+  },
   workspace_header: {
     display: "flex",
     position: "fixed",
@@ -28,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     fontSize: 16,
     fontWeight: 600,
-    marginTop: theme.spacing(4),
+    textDecoration: "none",
     textTransform: "capitalize",
   },
   projectCard_container: {

@@ -2,7 +2,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import useStyles from "./No-workspace.styles";
 
-export default function NoWorkspace({ handleClickOpen }) {
+export default function NoWorkspace() {
   const classes = useStyles();
 
   return (
@@ -19,17 +19,19 @@ export default function NoWorkspace({ handleClickOpen }) {
         <div className={classes.arrow_container}>
           <div className={classes.arrow}></div>
           <Typography variant="caption" className={classes.lint}>
-            <Link onClick={handleClickOpen} className={classes.link} to="#">Create a new Workspace.</Link>
+            <Link to="/workspaces/add" className={classes.link} >
+              Create a new Workspace
+            </Link>
           </Typography>
           <div className={classes.arrow}>
           </div>
           <Typography variant="caption" className={classes.lint}>
-            Named your workspace.
+            Named your workspace
           </Typography>
           <div className={classes.arrow}>
           </div>
           <Typography variant="caption" className={classes.lint}>
-            Create project within your workspace.
+            Create project within your workspace
           </Typography>
         </div>
       </div>

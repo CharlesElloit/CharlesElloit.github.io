@@ -4,8 +4,8 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/AddCircleOutline";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from '@material-ui/core/Zoom';
+import { Link } from "react-router-dom";
 import Workspace from "./Workspace";
-import CreateWorkspaceModal from "components/modals/CreateWorkspaceModal"
 import useStyles from "./WorkSpaceDashbord.styles";
 import NoWorkspace from "./No-workspace";
 
@@ -13,21 +13,13 @@ import axios from "axios";
 
 export default function WorkSpaceDashbord() {
   const [state, setState] = React.useState({
-    open: false,
     workspaces: []
   });
-
-  const handleClickOpen = () => {
-    setState({ ...state, open: true });
-  };
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
 
   const fetchWorkspaces = React.useRef(() => {});
 
   fetchWorkspaces.current = async () => {
-    const workspace = await axios.get("https://dailytasks-api.herokuapp.com/workspaces");
+    const workspace = await axios.get("http://localhost:4000/workspaces");
     if(workspace) {
       setState({ ...state, workspaces: workspace.data.results })
     }
@@ -46,16 +38,15 @@ export default function WorkSpaceDashbord() {
           Workspace
         </Typography>
         <Tooltip TransitionComponent={Zoom} title="Create New Workspace">
-          <IconButton onClick={handleClickOpen}>
+          <IconButton component={Link} to="/workspaces/add">
             <AddIcon className={classes.addIconButton} />
           </IconButton>
         </Tooltip>
-        <CreateWorkspaceModal handleClose={handleClose} open={state.open} />
       </div>
       <div className={classes.workspace_container}>
-        { !state.workspaces ? <NoWorkspace handleClickOpen={handleClickOpen} /> :
+        { !state.workspaces ? <NoWorkspace /> :
           state.workspaces.map(({ title, _id }) => (
-            <Workspace key={_id} title={title} />
+            <Workspace key={_id} id={_id} title={title} />
           ))}
       </div>
     </div>
