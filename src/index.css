@@ -38,7 +38,10 @@ code {
 .MuiOutlinedInput-input:hover {
   outline-style: none !important;
   box-shadow: none;
-  border: 1px solid #6E7681 !important;
+}
+
+.MuiOutlinedInput-input:focus {
+  border: none !important;
 }
 
 .MuiFormHelperText-contained {
