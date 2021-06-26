@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     fontWeight: 600,
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(1.5),
   },
   input: {
     border: "none",
@@ -69,7 +69,8 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     fontSize: 23,
     fontWeight: 600,
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(0.5),
   },
   subTitle: {
     color: "#fff",
@@ -81,7 +82,23 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "100vh",
-    backgroundColor: "#0D1117"
+    backgroundColor: "#0D1117",
+    "& .MuiOutlinedInput-input": {
+      padding: "5px 10px",
+      color: "#ffffff",
+      fontSize: 14,
+      fontWeight: 0,
+      borderRadius: 5,
+      marginTop: 4,
+      marginBottom: 4,
+    },
+    "& .MuiOutlinedInput-multiline": {
+      padding: 0,
+    },
+    "& .MuiFormHelperText-contained": {
+      marginLeft: 0,
+      color: "#6E7681",
+    },
   }
 })) 
 
