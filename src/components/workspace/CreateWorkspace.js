@@ -1,14 +1,16 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Input from "components/common/Input";
+import Content from "components/common/createUpdateWorkspaceFormTop";
+import { connect } from "react-redux";
+import { createWorkspace } from "redux-store/actions/workspaces/createWorkspace"
 import useStyles from "./CreateWorkspace.styles";
-import axios from "axios";
 import { useHistory } from "react-router-dom"
 
-export default function CreateWorkspace() {
+function CreateWorkspace({ createWorkspace, loading }) {
   const [state, setState] = React.useState({
+    inputError: false,
     workspaceTitle: ""
   });
 
@@ -19,24 +21,8 @@ export default function CreateWorkspace() {
     setState({ ...state, [_event.target.name]: _event.target.value })
   };
 
-  const handleCancel = () => {
-    history.goBack();
-  };
- 
-  const createWorkspace = async () => {
-    const data = {
-      title: state.workspaceTitle,
-    };
-
-    try {
-      const workspace = await axios.post("http://localhost:4000/workspaces/add", data);
-      if(workspace) {
-        console.log(workspace);
-        history.push("/")
-      }
-    } catch (error) {
-      console.log(error)
-    }
+  const createNewWorkspace = async () => {
+    createWorkspace({ title: state.workspaceTitle }, history);
   }
 
   return (
@@ -45,24 +31,14 @@ export default function CreateWorkspace() {
         <Grid item xs={4} />
         <Grid item xs={4} className={classes.container} >
           <div className={classes.body}>
-            <div className={classes.header}>
-              <Typography className={classes.title} variant="body1">
-                Create Workspace
-              </Typography>
-            </div>
-            <Typography className={classes.subTitle} variant="body2">
-              Workspace
-            </Typography>
-            <Typography className={classes.description} variant="caption">
-              A workspace contains all the project related to a specific catgory
-              Eg: Work, or personal projects.
-            </Typography>
+            <Content classes={classes} title="Create Workspace" />
             <Input
               required
               name="workspaceTitle"
               onChange={(_event) => handleChange(_event)}
               inputType="text"
-              classes={classes}
+              labeClassName={classes.label}
+              inputClassName={classes.input}
               labelName="Workspace name"
               helperText="Give your workspace a descriptive name."
             />
@@ -70,12 +46,12 @@ export default function CreateWorkspace() {
             <Button 
               disableRipple
               className={state.workspaceTitle.length < 3 ? classes.disabled : classes.createButton} 
-              onClick={state.workspaceTitle.length < 3 ? null : createWorkspace} 
+              onClick={state.workspaceTitle.length < 3 ? null : createNewWorkspace} 
               variant="contained"
             >
-              Create workspace
+              { !loading ? "Create workspace" : "Creating workspace" }
             </Button>
-            <Button onClick={handleCancel} className={classes.cancelButton}>Cancel</Button>
+            <Button onClick={() => history.goBack()} className={classes.cancelButton}>Cancel</Button>
           </div>
           </div>
         </Grid>
@@ -84,3 +60,13 @@ export default function CreateWorkspace() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  loading: state.workspaces.loading,
+});
+
+const mapDispatchToProps = {
+  createWorkspace,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateWorkspace);
