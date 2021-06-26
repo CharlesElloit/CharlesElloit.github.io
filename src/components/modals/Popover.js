@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import SettingsIcon from '@material-ui/icons/Settings';
+// import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#161b22",
     border: "1px solid #28313E",
     display: "flex",
+    borderRadius: 5,
     flexDirection: "column",
     marginTop: theme.spacing(1)
   },
@@ -92,10 +93,10 @@ export default function WorkspacePopover({ _id, name }) {
         <Paper className={classes.paper}>
           <div className={classes.linksContainer}>
             <div className={classes.ul}>
-              <Link className={classes.link} to={`/${name}/settings/${_id}`}>
+             {/* <Link className={classes.link} to={`/${name}/settings/${_id}`}>
                 <SettingsIcon className={classes.settingsIcon} />
                 <Typography variant="body2">Settings</Typography>
-              </Link>
+              </Link>  */}
             </div>
             <div className={classes.ul}>
               <Link className={classes.link} to={`/${name}/update/${_id}`}>
