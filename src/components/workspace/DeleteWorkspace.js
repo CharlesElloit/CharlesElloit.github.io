@@ -4,14 +4,16 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Checkbox from '@material-ui/core/Checkbox';
 import Input from "components/common/Input";
+import { connect } from "react-redux";
+import { deleteWorkspace } from "redux-store/actions/workspaces/deleteWorkspace"
 import useStyles from "./DeleteWorkspace.styles";
-import axios from "axios";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
-export default function DeleteWorkspace({match}) {
+function DeleteWorkspace({match, deleteWorkspace, loading}) {
   const [state, setState] = React.useState({
     checked: false,
-    workspaceTitle: ""
+    inputError: false,
+    workspaceTitle: "",
   });
  
   const { id, name } = match.params;
@@ -21,27 +23,25 @@ export default function DeleteWorkspace({match}) {
   const history = useHistory();
 
   const handleChange = (_event) => {
-    setState({ ...state, [_event.target.name]: _event.target.value })
+    setState({ ...state, workspaceTitle: _event.target.value });
+    if (state.workspaceTitle.length >= 3) {
+      if (workspaceName !== _event.target.value) {
+        setState({ ...state, inputError: true });
+        return;
+      }else{
+        setState({ ...state, inputError: false });
+      }
+    }
   };
 
   const handleChecked = () => {
     setState({ ...state, checked: !state.checked });
   };
-
-  const handleCancel = () => {
-    history.goBack();
-  };
  
-  const deleteWorkspace = async () => {
-    try {
-      const workspace = await axios.delete(`http://localhost:4000/workspace/${id}`);
-      if(workspace) {
-        console.log(workspace);
-        history.push("/")
-      }
-    } catch (error) {
-      console.log(error)
-    }
+  const handleDeleteWorkspace = async () => {
+    if(!state.checked || state.inputError || state.workspaceTitle.length > 3)
+      return;
+    deleteWorkspace(id, history);
   }
 
   return (
@@ -67,12 +67,15 @@ export default function DeleteWorkspace({match}) {
             </div>
             <Input
               required
+              id="standard-error-helper-text"
               name="workspaceTitle"
               onChange={(_event) => handleChange(_event)}
               inputType="text"
-              classes={classes}
+              error={state.inputError}
+              labeClassName={classes.label}
+              inputClassName={classes.input}
               labelName={`Re-type the name (${workspaceName}) to confirm`}
-              helperText="Enter the name of the workspace you want to delete. to confirm"
+              helperText={state.inputError ? "ERROR" : "Enter the name of the workspace you want to delete. to confirm"}
             />
             <div className={classes.checkboxContainer}>
               <Checkbox
@@ -88,13 +91,13 @@ export default function DeleteWorkspace({match}) {
           <div className={classes.actions}>
             <Button 
               disableRipple
-              className={state.workspaceTitle.length < 3 || state.checked !== true ? classes.disabled : classes.deleteButton} 
-              onClick={state.workspaceTitle.length < 3 ? null : deleteWorkspace} 
+              className={state.workspaceTitle.length < 3 || state.inputError || !state.checked ? classes.disabled : classes.deleteButton} 
+              onClick={state.workspaceTitle.length < 3 ? null : handleDeleteWorkspace} 
               variant="contained"
             >
-              Delete workspace
+             { !loading ? "Delete workspace" : "Deleting..."}
             </Button>
-            <Button onClick={handleCancel} className={classes.cancelButton}>Cancel</Button>
+            <Button onClick={() => history.goBack()} className={classes.cancelButton}>Cancel</Button>
           </div>
           </div>
         </Grid>
@@ -103,3 +106,13 @@ export default function DeleteWorkspace({match}) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  loading: state.workspaces.loading,
+});
+
+const mapDispatchToProps = {
+  deleteWorkspace,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteWorkspace)
