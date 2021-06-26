@@ -11,20 +11,23 @@ import InputLabel from "@material-ui/core/InputLabel";
  */
 
 const Input = ({
-  inputType, helperText, labelName, classes, onChange, name, value,
+  inputType, helperText, id, error, labelName,
+  labeClassName, inputClassName, onChange, name, value,
 }) => (
   <>
-    <InputLabel className={classes.label} htmlFor="outlined-adornment-text">
+    <InputLabel className={labeClassName} htmlFor="outlined-adornment-text">
       {labelName}
     </InputLabel>
     <TextField
+      id={id}
       fullWidth
       name={name}
       value={value}
       autoComplete="off"
       onChange={onChange}
       type={inputType}
-      className={classes.input}
+      error={error}
+      className={inputClassName}
       helperText={helperText}
       variant="outlined"
     />
