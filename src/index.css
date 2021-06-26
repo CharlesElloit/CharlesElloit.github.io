@@ -17,40 +17,19 @@ body {
   background: var(--dark-black);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 /* Mui overrides */
-
-.MuiOutlinedInput-input {
-  padding: 7px 10px !important;
-  color: #ffffff !important;
-  font-size: 14px !important;
-  font-weight: 0 !important;
-  border-radius: 5px !important;
-  margin-top: 4px !important;
-  margin-bottom: 4px !important;
-  border: 1px solid #6E7681 !important;
-}
-
-.MuiOutlinedInput-input:hover {
-  outline-style: none !important;
-  box-shadow: none;
-}
-
-.MuiOutlinedInput-input:focus {
-  border: none !important;
-}
 
 .MuiFormHelperText-contained {
   margin-left: 0 !important;
   color: var(--text-grey-color) !important;
 }
 
-.MuiOutlinedInput-multiline {
-  padding: 0 !important;
+.MuiOutlinedInput-root {
+  border: 1px solid #373d46 !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: none !important;
 }
 
 .MuiPaper-root {
