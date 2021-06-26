@@ -2,8 +2,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: theme.spacing(5 * 2),
-    marginLeft: theme.spacing(4)
+    // marginTop: theme.spacing(5 * 2),
+    // marginLeft: theme.spacing(4)
   },
   description: {
     color: "#727273",

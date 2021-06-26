@@ -6,7 +6,7 @@ import Content from "components/common/createUpdateWorkspaceFormTop";
 import { connect } from "react-redux";
 import { createWorkspace } from "redux-store/actions/workspaces/createWorkspace"
 import useStyles from "./CreateWorkspace.styles";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 function CreateWorkspace({ createWorkspace, loading }) {
   const [state, setState] = React.useState({
@@ -21,7 +21,7 @@ function CreateWorkspace({ createWorkspace, loading }) {
     setState({ ...state, [_event.target.name]: _event.target.value })
   };
 
-  const createNewWorkspace = async () => {
+  const handleCreateWorkspace = async () => {
     createWorkspace({ title: state.workspaceTitle }, history);
   }
 
@@ -46,7 +46,7 @@ function CreateWorkspace({ createWorkspace, loading }) {
             <Button 
               disableRipple
               className={state.workspaceTitle.length < 3 ? classes.disabled : classes.createButton} 
-              onClick={state.workspaceTitle.length < 3 ? null : createNewWorkspace} 
+              onClick={state.workspaceTitle.length < 3 ? null : handleCreateWorkspace} 
               variant="contained"
             >
               { !loading ? "Create workspace" : "Creating workspace" }

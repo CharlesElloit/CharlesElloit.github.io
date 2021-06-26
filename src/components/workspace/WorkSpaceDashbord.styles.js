@@ -2,8 +2,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   addIconButton: {
-    color: "#6E7681",
-    marginTop: theme.spacing(-1),
+    color: "#fff",
     fontSize: theme.spacing(4.5)
   },
   container: {
@@ -11,25 +10,25 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "#ffffff",
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 700,
   },
   titleContainer: {
     color: "#fff",
     display: "flex",
     flexDirection: "row",
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
     justifyContent: "space-between",
   },
   workspace_header: {
     display: "flex",
-    position: "fixed",
-    marginBottom: 10,
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   // workspace styles
   workspace_container: {
     paddingTop: theme.spacing(1),
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(1),
   },
   workspace_title: {
     color: "#ffffff",
