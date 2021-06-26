@@ -5,28 +5,21 @@ import AddIcon from "@material-ui/icons/AddCircleOutline";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from '@material-ui/core/Zoom';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchWorkspaces } from "redux-store/actions/workspaces/getAllWorkspaces";
 import Workspace from "./Workspace";
 import useStyles from "./WorkSpaceDashbord.styles";
 import NoWorkspace from "./No-workspace";
 
-import axios from "axios";
+function WorkSpaceDashbord({ fetchWorkspaces, workspaces, loading }) {
+  const handlefetchWorkspaces = React.useRef(() => {});
 
-export default function WorkSpaceDashbord() {
-  const [state, setState] = React.useState({
-    workspaces: []
-  });
-
-  const fetchWorkspaces = React.useRef(() => {});
-
-  fetchWorkspaces.current = async () => {
-    const workspace = await axios.get("http://localhost:4000/workspaces");
-    if(workspace) {
-      setState({ ...state, workspaces: workspace.data.results })
-    }
+  handlefetchWorkspaces.current = () => {
+    fetchWorkspaces();
   }
   
   React.useEffect(() => {
-    fetchWorkspaces.current();
+    handlefetchWorkspaces.current();
   }, [])
 
   const classes = useStyles();
@@ -44,11 +37,22 @@ export default function WorkSpaceDashbord() {
         </Tooltip>
       </div>
       <div className={classes.workspace_container}>
-        { !state.workspaces ? <NoWorkspace /> :
-          state.workspaces.map(({ title, _id }) => (
+        {!loading ? !workspaces ? <NoWorkspace /> :
+          workspaces.map(({ title, _id }) => (
             <Workspace key={_id} id={_id} title={title} />
-          ))}
+          )) : <h2 style={{ color: "#fff" }}>Loading...</h2>}
       </div>
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  loading: state.workspaces.loading,
+  workspaces: state.workspaces.workspaces,
+});
+
+const mapDispatchToProps = {
+  fetchWorkspaces,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkSpaceDashbord)

@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#EE4949",
     fontSize: 23,
     fontWeight: 600,
+    marginBottom: theme.spacing(0.5),
   },
   subTitle: {
     color: "#EE4949",
@@ -101,6 +102,18 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "100vh",
+    "& .MuiOutlinedInput-input": {
+      padding: "7px 10px",
+      color: "#ffffff",
+      fontSize: 14,
+      fontWeight: 0,
+      borderRadius: 5,
+      marginTop: 4,
+      marginBottom: 4,
+    },
+    "& .MuiOutlinedInput-input:hover": {
+      outlineStyle: "none",
+    }
   }
 })) 
 
