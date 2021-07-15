@@ -10,6 +10,7 @@ import { fetchWorkspaces } from "redux-store/actions/workspaces/getAllWorkspaces
 import Workspace from "./Workspace";
 import useStyles from "./WorkSpaceDashbord.styles";
 import NoWorkspace from "./No-workspace";
+import WorkspaceSkeleton from "components/skeletons/Workspace.skeleton";
 
 function WorkSpaceDashbord({ fetchWorkspaces, workspaces, loading }) {
   const handlefetchWorkspaces = React.useRef(() => {});
@@ -17,14 +18,14 @@ function WorkSpaceDashbord({ fetchWorkspaces, workspaces, loading }) {
   handlefetchWorkspaces.current = () => {
     fetchWorkspaces();
   }
-  
+
   React.useEffect(() => {
     handlefetchWorkspaces.current();
   }, [])
 
   const classes = useStyles();
 
-  return(
+  return (
     <div className={classes.container}>
       <div className={classes.workspace_header}>
         <Typography className={classes.title} variant="body1">
@@ -40,7 +41,7 @@ function WorkSpaceDashbord({ fetchWorkspaces, workspaces, loading }) {
         {!loading ? !workspaces ? <NoWorkspace /> :
           workspaces.map(({ title, _id }) => (
             <Workspace key={_id} id={_id} title={title} />
-          )) : <h2 style={{ color: "#fff" }}>Loading...</h2>}
+          )) : <WorkspaceSkeleton /> }
       </div>
     </div>
   );

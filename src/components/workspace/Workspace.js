@@ -18,7 +18,7 @@ export default function Workspace({ title, id }) {
           className={classes.workspace_title}
           variant="body1"
         >
-          {title}
+          { title }
         </Typography>
         <WorkspacePopover _id={id} name={joinedTitle} />
       </div>

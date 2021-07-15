@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     display: "flex",
     paddingTop: theme.spacing(2),
+  },
+  skeleton_card: {
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   }
 }));
 
