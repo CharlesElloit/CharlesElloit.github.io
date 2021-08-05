@@ -12,6 +12,7 @@ const data = [
   {_id: "kjslkfdjg", title: "Dailytask", backgroundColor: "none" },
   {_id: "liedirkkd", title: "Protfolio", backgroundColor: "#6E2C79" },
   {_id: "slkdfjjgi", title: "Startup", backgroundColor: "#5351B5" },
+  {_id: "jiwnsiejd", title: "Dailytask-backend", backgroundColor: "#1A304A" },
 ]
 
 export default function Workspace({ title, id }) {
