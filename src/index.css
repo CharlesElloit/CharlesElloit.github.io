@@ -35,3 +35,9 @@ body {
 .MuiPaper-root {
   background-color: #0d1117 !important;
 }
+
+table {
+  padding: 0px;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
